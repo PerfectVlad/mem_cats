@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="cats" content="width=device-width, initial-scale=1.0">
+  <title>Testimonial Slider</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      color: #94;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .testimonial {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 5rem;
+    }
+
+    h1 {
+      margin: 20px 0;
+    }
+
+    .line {
+      height: 2px;
+      width: 6rem;
+      background-color: #255;
+      margin-bottom: calc(3rem + 2vmin);
+    }
+
+    .arrow-wrapper {
+      position: relative;
+      width: 70%;
+      border-radius: 2rem;
+      box-shadow: rgba(245, 50, 60, 0.8) 0px 2px 8px 0px;
+      overflow: hidden;
+      place-items: center;
+    }
+
+    .cats-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: calc(2rem + 1vmin);
+      width: 100%;
+    }
+
+    #imgBox {
+      border-radius: 50%;
+      width: calc(6rem + 4vmin);
+      height: calc(6rem + 4vmin);
+      position: relative;
+      box-shadow: 5px -3px #F21439;
+      background-size: cover;
+      margin-bottom: calc(0.7rem + 0.5vmin);
+    }
+
+    #name {
+      margin-bottom: calc(0.7rem + 0.5vmin);
+      font-size: calc(1.5rem + 0.5vmin);
+      letter-spacing: calc(0.2rem + 0.1vmin);
+      font-weight: bold;
+    }
+
+    #status {
+      font-size: calc(1.2rem + 0.3vmin);
+      margin-bottom: calc(2.2rem + 0.5vmin);
+      color: #F21439;
+    }
+
+    #description {
+      font-size: calc(1.2rem + 0.3vmin);
+      width: 70%;
+      max-width: 40rem;
+      text-align: center;
+      margin-bottom: calc(1.4rem + 1vmin);
+      color: rgb(0, 0, 0);
+      line-height: 2rem;
+    }
+
+    .arrow {
+      width: calc(1.4rem + 0.6vmin);
+      height: calc(1.4rem + 0.6vmin);
+      border: solid #F21439;
+      border-width: 0 calc(0.5rem + 0.2vmin) calc(0.5rem + 0.2vmin) 0;
+      cursor: pointer;
+      transition: transform 0.9s;
+    }
+
+    .arrow:hover {
+      transition: 0.9s;
+      transform: scale(3.15);
+    }
+
+    .left-arrow-wrap {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      transform: rotate(135deg);
+    }
+
+    .right-arrow-wrap {
+      position: absolute;
+      top: 50%;
+      right: 5%;
+      transform: rotate(-45deg);
+    }
+
+    @media screen and (max-width: 900px) {
+      .testimonial {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="testimonial">
+    <h1>Какой ты сегодня котик?</h1>
+    <div class="line"></div>
+    <!-- arrow wrapper contains the cats and the arrows -->
+    <div class="arrow-wrapper">
+      <!-- cats section -->
+      <div id="catsWrap" class="cats-wrap">
+        <div id="imgBox"></div>
+        <div id="name"></div>
+        <div id="status"></div>
+        <div id="description"></div>
+      </div>
+      <!-- left arrow -->
+      <div class="left-arrow-wrap">
+        <div class="arrow"></div>
+      </div>
+      <!-- right arrow -->
+      <div class="right-arrow-wrap">
+        <div class="arrow"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const catsWrap = document.getElementById("catsWrap");
+    const leftArrow = document.querySelector(".left-arrow-wrap .arrow");
+    const rightArrow = document.querySelector(".right-arrow-wrap .arrow");
+    const imgBox = document.getElementById("imgBox");
+    const name = document.getElementById("name");
+    const status = document.getElementById("status");
+    const description = document.getElementById("description");
+
+    let cats = [{
+        photo: 'url("https://w.forfun.com/fetch/c4/c493aac67877288476b0fc52d55f55cf.jpeg")',
+        name: "Тёма",
+        status: "Я не злой и не депрессивный, я просто Артём",
+        description: "С раннего возраста Артем проявляет независимость и уверенность в себе. Он общителен и легко вступает в контакт с людьми разных взглядов, увлечений, убеждений. Ему присущи лидерские качества, которые на протяжении всей жизни позволяют выделять и подчинять себе негласно других людей, а также достигать поставленных целей и задач. Он всегда является «душой» компании."
+      },
+      {
+        photo: "url('https://pxwall.com/wp-content/uploads/2018/06/Wallpaper%20kitten,%20cute%20animals,%204k,%20Animals%20827769444.jpg')",
+        name: "Асхатик",
+        status: "Взрослый малый",
+        description: "Во взрослую жизнь Асхат входит сильной, отзывчивой, очень эмоциональной личностью, которая привыкла сосредотачивать внимание на чем-то одном – одно хобби, одно дело. Отраслью, в которой Асхата ждет успех, может стать строительство, архитектурное направление, машиностроение, а также современные технологии."
+      },
+      {
+        photo: "url('https://img2.goodfon.com/original/5722x4087/0/f5/kotenok-seryy-pushistyy-4321.jpg')",
+        name: "Даня",
+        status: "Знаком с фиксиками",
+        description: "Тайна имени раскрывается при знакомстве с Даниилом. По темпераменту мужчина относится к типу флегматиков, то есть ему присущи такие качества, как спокойствие, умеренность, невозмутимость. Он трудолюбив, умен, прилежен в работе. Неспешность и всегда улыбчиво-доброжелательное настроение вызывает уважение у окружающих."
+      },
+      {
+        photo: "url('https://trikky.ru/wp-content/blogs.dir/1/files/2020/05/10/94201-nos-usy-koshki_malogo_i_srednego_razmera-privlekatelnost-glaz-1920x12001-1.jpg')",
+        name: "Костик",
+        status: "Путь праведника труден...",
+        description: "Мужчина с именем Константин наделен сильным характером. Это терпеливый, стойкий, мужественный, спокойный человек. От природы имеет крепкое здоровье, развитое воображение, силу, волю и лидерские качества. Из толпы его выделяет высокий интеллект и коммуникабельность. Врожденная порядочность и добросердечность вызывает уважение людей. На него очень трудно повлиять."
+      }
+    ];
+
+    // для первого чела
+    imgBox.style.backgroundImage = cats[0].photo;
+    name.innerText = cats[0].name;
+    status.innerText = cats[0].status;
+    description.innerText = cats[0].description;
+    let currentPerson = 0;
+
+    //сторону, куда перемещать
+    function slide(side, personNumber) {
+      let catsWrapWidth = catsWrap.offsetWidth + "px";
+      let descriptionHeight = description.offsetHeight + "px";
+      //(+ or -)
+      let side1symbol = side === "left" ? "" : "-";
+      let side2symbol = side === "left" ? "-" : "";
+
+      setTimeout(() => {
+        imgBox.style.backgroundImage = cats[personNumber].photo;
+      }, 0);
+      setTimeout(() => {
+        description.style.height = descriptionHeight;
+      }, 100);
+      setTimeout(() => {
+        name.innerText = cats[personNumber].name;
+      }, 200);
+      setTimeout(() => {
+        status.innerText = cats[personNumber].status;
+      }, 300);
+      setTimeout(() => {
+        description.innerText = cats[personNumber].description;
+      }, 400);
+    }
+
+    function setNextCardLeft() {
+      if (currentPerson === 3) {
+        currentPerson = 0;
+        slide("left", currentPerson);
+      } else {
+        currentPerson++;
+      }
+
+      slide("left", currentPerson);
+    }
+
+    function setNextCardRight() {
+      if (currentPerson === 0) {
+        currentPerson = 3;
+        slide("right", currentPerson);
+      } else {
+        currentPerson--;
+      }
+
+      slide("right", currentPerson);
+    }
+
+    leftArrow.addEventListener("click", setNextCardLeft);
+    rightArrow.addEventListener("click", setNextCardRight);
+  </script>
+</body>
+
+</html>
